@@ -77,15 +77,15 @@ def checkIfInLogDict(username, logDict):
 
 
 """
-    Looks through latest.txt log file for relevant lines, then sends them to be sliced.
+    Looks through latest.log log file for relevant lines, then sends them to be sliced.
 """
 def logParser(logDict, playerDict, verbose = False):
     i = 0
     logouts = []
     logins = []
 
-    #Open and read data from latest.txt
-    log = open('latest.txt', encoding="utf-8")
+    #Open and read data from latest.log
+    log = open('latest.log', encoding="utf-8")
     data = log.read()
     log.close()
     
