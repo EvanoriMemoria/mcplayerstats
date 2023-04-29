@@ -79,13 +79,13 @@ def checkIfInLogDict(username, logDict):
 """
     Looks through latest.log log file for relevant lines, then sends them to be sliced.
 """
-def logParser(logDict, playerDict, verbose = False):
+def logParser(filePath, logDict, playerDict, verbose = False):
     i = 0
     logouts = []
     logins = []
 
     #Open and read data from latest.log
-    log = open('latest.log', encoding="utf-8")
+    log = open(filePath, encoding="utf-8")
     data = log.read()
     log.close()
     
@@ -259,6 +259,7 @@ def calcTimePlayed(logDict, playerDict, verbose = False):
 
 def main():
     outputFile = "player_stats.json"
+    filePath = "/opt/minecraft/server/logs/latest.log"
     logDict = dict()
     playerDict = dict()
     
@@ -267,7 +268,7 @@ def main():
     else:
         playerDict = dict()
 
-    logParser(logDict, playerDict,  verbose = False)
+    logParser(filePath, logDict, playerDict,  verbose = False)
 
     calcTimePlayed(logDict, playerDict)
 
