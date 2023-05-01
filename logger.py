@@ -3,6 +3,7 @@ from dateutil.parser import parse
 import json
 import re
 from os.path import exists
+import TCPClient as tcp
 
 """ 
 Slices raw login input data into usable strings
@@ -273,6 +274,8 @@ def main():
     calcTimePlayed(logDict, playerDict)
 
     writeToFile(playerDict, outputFile)
+
+    tcp.sendmsg(playerDict)
 
     print("Complete! Check out player_stats.json for the data.")
 
