@@ -216,7 +216,7 @@ def calcTimePlayed(logDict, playerDict, verbose = False):
             else:
                 print(f"Invalid logType: {logDict[username][log]['logType']}")
 
-            #This means there are two logins in a row, so we add a fake logout one second from the previous login.
+            #This means there are two logins in a row, so we attempt to add a fake logout 30 minutes from the previous login.
             if int(playerDict[username]["totalLogins"]) >= int(playerDict[username]["totalLogouts"]) + 2:
                 date = playerDict[username]['lastSeen']
                 fresh_logout = parse(date)+timedelta(minutes=30)
@@ -241,6 +241,10 @@ def calcTimePlayed(logDict, playerDict, verbose = False):
 
                 #Update values for totalPlaytime
                 timeMath(username, dateISO, playerDict)
+            #ignore unsuccessful logins
+            elif int(playerDict[username]["totalLogouts"]) >= int(playerDict[username]["totalLogins"]) + 2:
+                playerDict[username]["totalLogouts"] -= 1
+                continue
             else:
                 if logDict[username][log]["logType"] == "logout":
                     timeMath(username, log, playerDict)
