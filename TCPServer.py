@@ -2,6 +2,7 @@ import socketserver
 import hmac
 import pickle
 import hashlib
+import pgsqlBridge
 
 def getKey():
     with open('key.txt', 'r') as keyfile:
@@ -32,7 +33,8 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         else:
             unpickled_data = pickle.loads(pickled_data)
             print(unpickled_data)
-        # just send back the same data, but upper-cased
+            pgsqlBridge.updateValues(unpickled_data)
+        # Confirmation
         self.request.sendall(bytearray("Thanks!", 'utf-8'))
 
 if __name__ == "__main__":
