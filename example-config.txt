@@ -1,0 +1,2 @@
+key: 
+dsn: dbname=test user=postgres password=secret
